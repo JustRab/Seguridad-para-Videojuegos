@@ -1,23 +1,16 @@
-#include <iostream>
-#include <string>
-#include "CaesarEncryption.cpp"
-using namespace std;
-
+#include "Prerequisites.h"
+#include "AsciiBinary.h"
 int main()
 {
-	CaesarEncryption ce;
-	string text;
-	int shift;
+	AsciiBinary aB;
 
-	cout << "Enter the text to encrypt: ";
-	getline(cin, text);
+	std::string input = "Hello, World!";
+	std::string binaryOutput = aB.stringToBinary(input);
+	std::cout << "Binary representation of \"" << input << "\": " << binaryOutput << std::endl;
+	std::string message = aB.binaryToString(binaryOutput);
+	std::cout << "Converted back to string: \"" << message << "\"" << std::endl;
 
-	cout << "Enter the shift value: ";
-	cin >> shift;
 
-	string encryptedText = ce.EncryptionCaesar(text, shift);
-
-	cout << "Encrypted text: " << encryptedText << endl;
 
 	return 0;
 }
