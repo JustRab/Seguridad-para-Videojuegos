@@ -129,13 +129,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CaesarEncryption.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\CaesarEncryption.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Prerequisites.h" />
-    <ClInclude Include="..\include\XOREncoder.h" />
     <ClInclude Include="include\AsciiBinary.h" />
+    <ClInclude Include="include\caesar.h" />
+    <ClInclude Include="include\DES.h" />
+    <ClInclude Include="include\Prerequisites.h" />
+    <ClInclude Include="include\XOREncoder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
