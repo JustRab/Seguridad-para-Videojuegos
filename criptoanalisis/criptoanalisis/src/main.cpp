@@ -1,16 +1,13 @@
 #include "Prerequisites.h"
-#include "AsciiBinary.h"
-int main()
-{
-	AsciiBinary aB;
+#include "DES.h"
+int main() {
+	std::bitset<64> plaintext("0001001000110100010101100111100010011010101111001101111011110001");
+	std::bitset<64> key("0001001100110100010101110111100110011011101111001101111111110001");
 
-	std::string input = "Hello, World!";
-	std::string binaryOutput = aB.stringToBinary(input);
-	std::cout << "Binary representation of \"" << input << "\": " << binaryOutput << std::endl;
-	std::string message = aB.binaryToString(binaryOutput);
-	std::cout << "Converted back to string: \"" << message << "\"" << std::endl;
+	std::string userKey = "$el_pepe$";
 
-
-
+	DES des(key);
+  auto ciphertext = des.encode(plaintext);
+  std::cout << "Ciphertext: " << ciphertext << std::endl;
 	return 0;
 }
