@@ -1,13 +1,18 @@
 #include "Prerequisites.h"
-#include "DES.h"
+#include "Vigenere.h"
 int main() {
-	std::bitset<64> plaintext("0001001000110100010101100111100010011010101111001101111011110001");
-	std::bitset<64> key("0001001100110100010101110111100110011011101111001101111111110001");
+  std::string text = "Hola este mensaje otorga una decima";
+  std::string key = "RobertoCharreton00";
 
-	std::string userKey = "$el_pepe$";
+  std::cout << "Texto original: " << text << std::endl;
+  std::cout << "Clave: " << key << std::endl;
 
-	DES des(key);
-  auto ciphertext = des.encode(plaintext);
-  std::cout << "Ciphertext: " << ciphertext << std::endl;
-	return 0;
+  Vigenere vigenere(key);
+  std::string encrypted = vigenere.encode(text);
+  std::cout << "Texto cifrado: " << encrypted << std::endl;
+
+  std::string decrypted = vigenere.decode(encrypted);
+  std::cout << "Texto descifrado: " << decrypted << std::endl;
+
+  return 0;
 }
