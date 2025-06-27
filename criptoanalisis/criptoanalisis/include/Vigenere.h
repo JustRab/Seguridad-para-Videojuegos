@@ -1,5 +1,4 @@
 #pragma once
-#pragma onceAdd commentMore actions
 #include "Prerequisites.h"
 
 class
@@ -72,6 +71,70 @@ public:
 		}
 
 		return result; // Return the encoded string
+	}
+
+	static double fitness(const std::string& text) {
+			static const std::vector<std::string> comunes = {
+			" DE ", " LA ", " EL ", " QUE ", " Y ",
+			" A ", " EN ", " UN ", " PARA ", " CON ",
+			" POR ", " COMO ", " SU ", " AL ", " DEL ",
+			" LOS ", " SE ", " NO ", " MAS ", " O ",
+			" SI ", " YA ", " TODO ", " ESTA ", " HAY ",
+			" ESTO ", " SON ", " TIENE ", " HACE ", " SUS ",
+			" VIDA ", " NOS ", " TE ", " LO ", " ME ",
+			" ESTE ", " ESA ", " ESE ", " BIEN ", " MUY ",
+			" PUEDE ", " TAMBIEN ", " AUN ", " MI ", " DOS ",
+			" UNO ", " OTRO ", " NUEVO ", " SIN ", " ENTRE ",
+			" SOBRE "
+		};
+
+		double score = 0;
+		for (auto& w : comunes) {
+			size_t pos = 0;
+			while ((pos = text.find(w, pos)) != std::string::npos) {
+				score += w.length();
+				pos += w.length();
+			}
+		}
+		return score;
+
+	}
+
+	static std::string breakEncode(const std::string& text, int maxKeyLenght) {
+		std::string bestKey;
+		std::string bestText;
+		std::string trailKey;
+
+		double bestScore = -std::numeric_limits<double>::infinity(); // Initialize best score
+
+		// Funcion revursiva para generar todas las posibles claves de longitud
+		std::function<void(int, int)> dfs = [&](int pos, int maxLen) {
+			if (pos == maxLen) {
+				Vigenere v(trailKey);
+				std::string decodedText = v.decode(text);
+				double score = fitness(decodedText); // Score the decoded text
+				if (score > bestScore) {
+					bestScore = score;
+					bestKey = trailKey;
+					bestText = decodedText;
+				}
+				return;
+			}
+			for (char c = 'A'; c <= 'Z'; ++c) {
+				trailKey[pos] = c;
+				dfs(pos + 1, maxLen);
+			}
+			};
+
+		for (int L = 1; L <= maxKeyLenght; ++L) {
+			trailKey.assign(L, 'A');
+			dfs(0, L);
+		}
+
+		std::cout << "*** Fuerza Bruta Vigenère ***\n";
+		std::cout << "Clave encontrada:  " << bestKey << "\n";
+		std::cout << "Texto descifrado:  " << bestText << "\n\n";
+		return bestKey;
 	}
 
 private:
