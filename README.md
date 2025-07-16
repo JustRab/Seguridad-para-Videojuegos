@@ -1,60 +1,161 @@
-# README - Programa de Cifrado de Archivos (Examen Parcial 2 | Cripto Analisis)
+# Manual de Usuario – Programa de Cifrado Multi-Algoritmo en C++
 
-## Descripción
-
-Este programa permite cifrar un archivo de texto usando un algoritmo XOR con una clave aleatoria generada internamente.
-El archivo cifrado se guarda en formato hexadecimal. El proceso de descifrado se realiza internamente solo para verificar que el cifrado y descifrado sean correctos, **pero no se expone al usuario ni se guarda la clave**, por lo que el archivo cifrado no puede ser descifrado fuera del programa.
+Este programa de consola permite cifrar y descifrar archivos de texto utilizando diferentes algoritmos clásicos de criptografía, así como un método adicional de cifrado irrompible. Es una herramienta desarrollada para propósitos educativos, con enfoque en demostrar las técnicas de cifrado simétrico, ataques de fuerza bruta y análisis de texto cifrado aprendidos en mi clase de criptografía impartida por el profesor Roberto Charretón Kaplun.
 
 ---
 
 ## Requisitos
 
-* Windows, Linux o macOS con compilador C++ compatible (Visual Studio recomendado).
-* El archivo a cifrar debe ser un archivo de texto (puede contener cualquier tipo de texto).
-* El programa se ejecuta desde la consola o terminal.
+* Compilador con soporte para C++17 o superior (g++, MSVC, Clang)
+* Archivos de texto plano `.txt`
+* Uso en entornos de consola (Windows/Linux/MacOS)
 
 ---
 
-## Uso
+## Archivos de ejemplo
 
-1. Ejecuta el programa.
-2. El programa mostrará la ruta actual donde se está ejecutando (para tu referencia).
-3. Se te pedirá que ingreses la ruta completa del archivo original que quieres cifrar.
+El repositorio incluye dos carpetas:
 
-   * Ejemplo: `C:\Users\TuUsuario\Documents\archivo.txt`
-   * O solo el nombre del archivo si está en la carpeta de ejecución.
-4. Se te pedirá que ingreses el nombre del archivo donde quieres guardar el archivo cifrado.
-
-   * Ejemplo: `archivo_cifrado.txt`
-   * Puedes incluir ruta completa si quieres guardarlo en otra carpeta.
-5. El programa generará una clave secreta internamente (no visible ni guardada) y cifrará el contenido del archivo.
-6. El archivo cifrado se guarda en el archivo que especificaste, en formato hexadecimal.
-7. El programa realizará una verificación interna para asegurarse de que el cifrado y descifrado funcionaron correctamente.
-8. Se mostrará un mensaje en pantalla indicando si la verificación fue exitosa:
-
-   * `¡Éxito! El contenido coincide.`
-   * O en caso de error: `Fallo: El contenido no coincide.`
+* `Datos crudos/`: Contiene archivos de texto plano listos para cifrar.
+* `Datos cifrados/`: Almacena los archivos ya cifrados por el programa, separados por algoritmo si se desea.
 
 ---
 
-## Importante
+## Instrucciones de uso
 
-* No es posible descifrar el archivo cifrado con este programa ni con otro porque la clave **no se guarda ni se muestra en ningún lado**.
-* Si pierdes la clave (que no puedes ver), no podrás recuperar el archivo original.
-* Asegúrate de conservar el archivo original si necesitas consultarlo.
-* El programa está diseñado para proteger la información de forma segura y evitar que otros puedan descifrar el archivo.
+### Compilación
 
----
+Usa tu compilador preferido para compilar el programa principal.
 
-## Ejemplo de ejecución
+Ejemplo con g++:
 
-```plaintext
-Ruta de ejecución actual: C:\Users\TuUsuario\Documents
+```bash
+g++ main.cpp -o Cifrador -std=c++17
+```
 
-Ruta del archivo original a cifrar: datos_sensibles.txt
-Nombre del archivo cifrado a guardar: datos_sensibles_cifrado.txt
+Ejecuta el archivo resultante:
 
-Verificación: ¡Éxito! El contenido coincide.
+```bash
+./Cifrador
 ```
 
 ---
+
+## Menú principal
+
+Al iniciar el programa, verás el siguiente menú:
+
+```
+========= MENU PRINCIPAL =========
+1. Cifrado Irrompible (XOR y llave descartada)
+2. Cifrado XOR (Reversible)
+3. Cifrado César
+4. Cifrado Vigenère
+5. Cifrado DES
+6. Salir
+```
+
+---
+
+## Modo 1: Cifrado Irrompible
+
+* Utiliza XOR con una clave aleatoria de 16 caracteres.
+* La clave **no se almacena**, por lo tanto, el archivo cifrado **no puede descifrarse**.
+* Este método está diseñado para ser teóricamente irrompible.
+
+**Entrada solicitada:**
+
+* Ruta del archivo original (puede usar uno de `Datos crudos/`)
+* Nombre del archivo cifrado (se recomienda guardarlo en `Datos cifrados/`)
+
+**Resultado esperado:**
+
+* Archivo cifrado en formato hexadecimal.
+* Mensaje de verificación de éxito.
+
+---
+
+## Modo 2: Cifrado XOR Reversible
+
+* Utiliza el mismo algoritmo XOR, pero con una clave proporcionada por el usuario.
+* Puede cifrarse y luego descifrarse con la misma clave.
+
+**Entrada solicitada:**
+
+* Ruta del archivo original o cifrado.
+* Clave personalizada (texto alfanumérico).
+* Archivo de salida.
+
+---
+
+## Modo 3: Cifrado César
+
+* Desplaza letras y dígitos numéricos un número fijo de posiciones.
+
+**Opciones disponibles:**
+
+1. Cifrar con desplazamiento manual.
+2. Descifrar con desplazamiento conocido.
+3. Ataque de fuerza bruta (probar todos los desplazamientos posibles).
+4. Estimar clave por frecuencia de letras.
+
+---
+
+## Modo 4: Cifrado Vigenère
+
+* Cifra texto con una clave basada en una palabra.
+
+**Entrada solicitada:**
+
+* Clave (solo letras).
+* Modo cifrado o descifrado.
+* Permite romper el cifrado por fuerza bruta si no se conoce la clave, indicando longitud máxima.
+
+---
+
+## Modo 5: Cifrado DES (simplificado)
+
+* Usa bloques de 8 bytes y claves de hasta 8 caracteres.
+* Permite cifrar y descifrar con la misma clave.
+
+**Importante:**
+
+* El archivo debe tener una longitud múltiplo de 8 (el programa lo rellena si es necesario).
+* La clave ingresada se transforma internamente en formato binario válido.
+
+**Entrada solicitada:**
+
+* Ruta del archivo.
+* Clave de 1 a 8 caracteres.
+* Archivo de salida.
+
+---
+
+## Salida y verificación
+
+Después de cada operación válida, el programa mostrará un mensaje como el siguiente:
+
+```
+[✓] Operación completada con éxito.
+[✓] Verificación: El contenido descifrado coincide con el original.
+```
+
+En caso de error (por ejemplo, archivo no encontrado, clave inválida), se mostrará un mensaje descriptivo sin cerrar el programa, permitiendo reintentar la operación.
+
+---
+
+## Consideraciones
+
+* Las rutas pueden ser relativas (`./Datos crudos/archivo.txt`) o absolutas (`C:/Ruta/Completa/archivo.txt`).
+* El sistema no sobrescribe archivos existentes, a menos que el usuario proporcione el mismo nombre de salida.
+* El programa retorna al menú principal tras cada operación exitosa o fallida.
+
+---
+
+## Créditos
+
+Autor: Iván Licea Godinez 
+Co-Autor: Roberto Charreton Kaplun
+
+---
+

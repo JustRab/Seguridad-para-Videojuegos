@@ -1,0 +1,1 @@
+The XOR cipher is a simple symmetric encryption method that uses the XOR (exclusive or) operation to encrypt and decrypt data. It involves combining plaintext with a key using the XOR function, and the same key is then used to reverse the process. XOR is a binary operation that returns 1 if the inputs differ and 0 if they are the same.

@@ -1,6 +1,7 @@
 #pragma once
 // STD Libraries
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <vector>
 #include <string>
@@ -13,5 +14,4 @@
 #include <random>
 #include <mutex>
 #include <array>
-#include <fstream>
 #include <filesystem>

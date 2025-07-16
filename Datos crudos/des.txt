@@ -1,0 +1,1 @@
+The Data Encryption Standard (DES) is a symmetric-key block cipher that encrypts 64-bit blocks of data using a 56-bit key. It was a widely used standard for securing sensitive information but has since been largely replaced by more secure algorithms like AES due to its relatively short key length.

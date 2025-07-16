@@ -1,0 +1,1 @@
+An ASCII to binary cipher converts text characters into their corresponding binary code representations. Each ASCII character, which includes letters, numbers, symbols, and control characters, has a unique numerical value. This numerical value is then converted into its binary (base-2) equivalent, which consists of a sequence of 0s and 1s.
