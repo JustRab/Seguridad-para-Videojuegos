@@ -1,0 +1,3 @@
+Hola, este es un archivo de prueba para el programa de cifrado.
+Contiene texto sencillo y será utilizado para demostrar cifrados clásicos como César, Vigenère, XOR y DES.
+Fin del mensaje.
